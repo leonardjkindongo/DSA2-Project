@@ -6,13 +6,19 @@ public class MainB {
         Scanner sc = new Scanner(System.in);
         // binary tree delartion
         BinarySearchTree bst = new BinarySearchTree(); // Binary Search Tree declaration
-        // AVL tree declaration
+        AVLTree avlTree = new AVLTree(); // AVL Tree declaration
+        // Red Black Tree declaration
+        RedBlackTree rbt = new RedBlackTree(); // Red Black Tree declaration
+        // B-tree declaration
+        BTree bTree = new BTree(3); // B-tree declaration with minimum degree 3
 
         int[] elements = {7, 5, 9, 4, 6, 8, 13, 2};
 
         for (int element : elements){
             bst.insert(element);
         }
+
+        int[] allNineElements = {7, 5, 9, 4, 6, 8, 13, 2, 3};
 
         while (true) {
             System.out.println("\n===================TREE IMPLEMENTATION MENU===================\n");
@@ -28,12 +34,12 @@ public class MainB {
 
             // switch (choice)
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println("Inserting node 3 into the Binary Search Tree...");
                     bst.insert(3);
                     System.out.println("Node 3 inserted successfully.");
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Postorder traversal of the Binary Search Tree:");
                     List<Integer> postOrderResult = bst.postOrderTraversal(bst.root);
                     for (int value : postOrderResult) {
@@ -41,22 +47,37 @@ public class MainB {
                     }
                     // Print the insertion order
                     System.out.println("\nPostorder traversal completed.");
-                    break;
-                case 3:
-                    // TODO AVL tree insert elements
-                    break;
-                case 4:
-                    // TODO Red Black Tree insert elements and postorder transversal
-                    break;
-                case 5:
-                    // TODO B-trees implementation and search for key 8
-                    break;
-                case 6:
+                }
+                case 3 -> {
+                    for (int element : allNineElements) {
+                        avlTree.insert(element);
+                    }
+                    avlTree.display();
+                }
+                case 4 -> {
+                    for (int element : allNineElements) {
+                        rbt.insert(element);
+                    }
+                    System.out.println("Postorder traversal of the Red Black Tree:");
+                    rbt.postOrder();
+                    System.out.println("\nPostorder traversal completed.");
+                }
+                case 5 -> {
+                    for (int element : allNineElements) {
+                        bTree.insert(element);
+                    }
+                    System.out.println("Searching for key 8 in the B-tree...");
+                    if (bTree.search(8) != null)
+                        System.out.println("Key 8 found in the B-tree.");
+                    else
+                        System.out.println("Key 8 not found in the B-tree.");
+                }
+                case 6 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
