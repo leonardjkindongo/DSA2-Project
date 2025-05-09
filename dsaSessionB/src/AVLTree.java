@@ -1,6 +1,7 @@
 public class AVLTree {
-    private class AVLNode {
-        int key;
+
+    private class AVLNode { 
+        int key; 
         AVLNode left, right;
         int height;
 
@@ -12,16 +13,24 @@ public class AVLTree {
 
     private AVLNode root;
 
+    // insert a new key
+    // into the AVL tree
     public void insert(int key){
+        // Perform the normal BST insert
+        // and then balance the tree
         root = insertHelper(root, key);
     }
 
-    private AVLNode insertHelper(AVLNode node, int key) {
+    private AVLNode insertHelper(AVLNode node, int key) { // Recursive function to insert a key in the subtree rooted with node
+        
         if (node == null) {
+            // If the tree is empty, return a new node
             return new AVLNode(key);
         }
 
         if (key < node.key) {
+            // If the key is smaller than the node's key, insert it in the left subtree
+            // Otherwise, insert it in the right subtree
             node.left = insertHelper(node.left, key);
         } else if (key > node.key) {
             node.right = insertHelper(node.right, key);
@@ -70,6 +79,8 @@ public class AVLTree {
     }
 
     int getBalance(AVLNode node) {
+        // If the node is null, return 0
+        // This means the tree is empty or we have reached a leaf node
         if (node == null) {
             return 0;
         }
