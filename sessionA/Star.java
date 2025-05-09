@@ -5,14 +5,14 @@ import java.util.List;
  * Creates the star topology network.
  * Managing the server node and provides methods to add/remove client nodes.
  */
-public class StarTopology {
+public class Star {
     private ServerNode server;
     private List<ClientNode> clients;
 
 
     // Constructor for Star network
 
-    public StarTopology() {
+    public Star() {
         this.server = new ServerNode();
         this.clients = new ArrayList<>();
     }
