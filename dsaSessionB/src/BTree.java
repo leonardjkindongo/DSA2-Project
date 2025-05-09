@@ -2,11 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BTreeNode {
-        List<Integer> keys;
+    // B-tree node properties
+    // Each node contains a list of keys and a list of children
+    List<Integer> keys;
+    // List of keys in the node
+    // Each key is an integer
     List<BTreeNode> children;
+    // List of children nodes
+    // Each child is a BTreeNode
     boolean leaf;
     int t; // Minimum degree
 
+    // Constructor to create a new B-tree node
+    // t is the minimum degree (defines the range for number of keys)
     BTreeNode(int t, boolean leaf) {
         this.t = t;
         this.leaf = leaf;
@@ -14,6 +22,8 @@ class BTreeNode {
         this.children = new ArrayList<>();
     }
 
+    // Find the index of the first key greater than or equal to k
+    // This method is used to find the position of the key in the node
     int findKey(int k) {
         int idx = 0;
         while (idx < keys.size() && keys.get(idx) < k)
@@ -21,6 +31,8 @@ class BTreeNode {
         return idx;
     }
 
+    // Insert a key into this node
+    // This method is used when the node is not full
     void insertNonFull(int k) {
         int i = keys.size() - 1;
 
@@ -39,11 +51,16 @@ class BTreeNode {
                 if (keys.get(temp) < k)
                     temp++;
             }
+            // Insert the key into the child
+            // This is the recursive call to insert the key into the child
             children.get(temp).insertNonFull(k);
         }
     }
 
+    // Split the child of this node
+    // This method is used when a child node is full
     void splitChild(int i, BTreeNode y) {
+        // Create a new node to hold the keys of y
         BTreeNode z = new BTreeNode(y.t, y.leaf);
         // Move the last t-1 keys from y to z
         for (int j = 0; j < y.keys.size() - y.t; j++) {
@@ -51,26 +68,35 @@ class BTreeNode {
         }
         // Clear the keys in y after moving
         for (int j = y.t - 1; j < y.keys.size(); j++) {
+            // Remove the key from y
             y.keys.remove(y.t - 1);
         }
 
         if (!y.leaf) {
             // Move the last t children from y to z
             for (int j = 0; j < y.children.size() - y.t; j++) {
+                // Add the child to z
                 z.children.add(y.children.get(y.t + j));
             }
             // Clear the children in y after moving
             for (int j = y.t; j < y.children.size(); j++) {
+                // Remove the child from y
                 y.children.remove(y.t);
             }
         }
 
         // Insert z as a child of this node
         children.add(i + 1, z);
+        // Move the middle key of y to this node
+        // This key will be the new parent key
         keys.add(i, y.keys.get(y.t - 1));
+        // Remove the middle key from y
+        // This key is now the parent key
         y.keys.remove(y.t - 1);
     }
 
+    // Traverse the B-tree and print keys
+    // This method is used to display the keys in the B-tree
     void traverseHelper() {
         int i;
         for (i = 0; i < keys.size(); i++) {
@@ -84,6 +110,8 @@ class BTreeNode {
         }
     }
 
+    // Search for a key in the B-tree
+    // Returns the node containing the key if found, otherwise returns null
     BTreeNode search(int k) {
         int i = findKey(k);
 
@@ -107,6 +135,8 @@ public class BTree {
         this.t = t;
     }
 
+    // Insert a key into the B-tree
+    // If the root is null, create a new root node
     void insert(int k) {
         if (root == null) {
             root = new BTreeNode(t, true);
@@ -130,12 +160,15 @@ public class BTree {
     }
 
     @SuppressWarnings("unused")
+    // This method is not used in the current implementation
     void traverse() {
         if (root != null) {
             root.traverseHelper();
         }
     }
 
+    // Search for a key in the B-tree
+    // Returns the node containing the key if found, otherwise returns null
     BTreeNode search(int k) {
         if (root == null) {
             return null;

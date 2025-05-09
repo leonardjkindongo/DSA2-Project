@@ -14,10 +14,12 @@ public class MainB {
 
         int[] elements = {7, 5, 9, 4, 6, 8, 13, 2};
 
+        // Insert elements into the Binary Search Tree
         for (int element : elements){
             bst.insert(element);
         }
 
+        // Array of nine elements to be inserted into the AVL, B-Tree and Red Black Trees
         int[] allNineElements = {7, 5, 9, 4, 6, 8, 13, 2, 3};
 
         while (true) {
@@ -32,7 +34,7 @@ public class MainB {
             System.out.println("Enter your choice (a number 1-6): ");
             int choice = sc.nextInt();
 
-            // switch (choice)
+            // Switch case to handle user input
             switch (choice) {
                 case 1 -> {
                     System.out.println("Inserting node 3 into the Binary Search Tree...");
@@ -42,6 +44,7 @@ public class MainB {
                 case 2 -> {
                     System.out.println("Postorder traversal of the Binary Search Tree:");
                     List<Integer> postOrderResult = bst.postOrderTraversal(bst.root);
+                    // Print the postorder traversal result
                     for (int value : postOrderResult) {
                         System.out.print(value + " ");
                     }
@@ -49,12 +52,17 @@ public class MainB {
                     System.out.println("\nPostorder traversal completed.");
                 }
                 case 3 -> {
+                    System.out.println("Inserting the nine elements into the AVL Tree...");
+                    // Insert the nine elements into the AVL tree
                     for (int element : allNineElements) {
                         avlTree.insert(element);
                     }
+                    // Display the AVL tree
                     avlTree.display();
                 }
                 case 4 -> {
+                    System.out.println("Inserting the nine elements into the Red Black Tree...");
+                    // Insert the nine elements into the Red Black tree
                     for (int element : allNineElements) {
                         rbt.insert(element);
                     }
@@ -63,6 +71,8 @@ public class MainB {
                     System.out.println("\nPostorder traversal completed.");
                 }
                 case 5 -> {
+                    System.out.println("Inserting the nine elements into the B-tree...");
+                    // Insert the nine elements into the B-tree
                     for (int element : allNineElements) {
                         bTree.insert(element);
                     }
@@ -73,10 +83,14 @@ public class MainB {
                         System.out.println("Key 8 not found in the B-tree.");
                 }
                 case 6 -> {
+                    // Exit the program when the user chooses option 6
+                    System.out.println("Thank you for using the Tree Implementation Program!");
                     System.out.println("Exiting...");
                     sc.close();
                     return;
                 }
+                // Default case for invalid input
+                // This case will be executed if the user enters a number outside the range of 1-6
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
