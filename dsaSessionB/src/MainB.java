@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class MainB {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // binary tree delartion
@@ -17,7 +17,7 @@ public class Main {
         while (true) {
             System.out.println("\n===================TREE IMPLEMENTATION MENU===================\n");
             System.out.println("1. Binary Search Tree (Inserting Node 3)");
-            System.out.println("2. Binary Search Tree (Postorder transversal)\n");
+            System.out.println("2. Binary Search Tree (Postorder transversal)");
             System.out.println("3. AVL (Insert the nine elements)");
             System.out.println("4. Red Black Tree (Insert the nine elements and display Postorder transversal)");
             System.out.println("5. B-trees (Implementation and search for key 8)");
