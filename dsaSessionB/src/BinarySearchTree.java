@@ -17,6 +17,7 @@ public class BinarySearchTree {
             insertionOrder.add(value); // Add the value to the insertion order list
         }
     }
+
     // Helper method to insert a new node into the tree
     private TreeNode insertHelper(TreeNode root, TreeNode node) {
         // Base case: if the current node is null, return the new node
@@ -72,5 +73,12 @@ public class BinarySearchTree {
         // Traverse the right subtrees
         postOrderHelper(root.right, result);
         result.add(root.value);
+    }
+
+    //Main method to demonstrate insertion of node 3
+    public static void main(String[] args) {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.insert(3); // Inserting value 3
+        System.out.println("Inserted 3? " + bst.search(3)); // Should print true
     }
 }
